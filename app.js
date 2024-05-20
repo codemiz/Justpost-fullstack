@@ -19,6 +19,9 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
 
 
 const PORT = process.env.PORT || 3000;
