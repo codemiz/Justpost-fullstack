@@ -36,32 +36,33 @@
    </Nav>
 
    <main class="flex flex-col gap-6 items-center mt-7">
-    <div class=" w-2/5 h-64  bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center justify-end">
+    <div class=" w-2/5 h-40  bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center justify-end">
         
         <h1 class="font-bold text-white text-5xl">John Doe<span class="text-orange-500">.</span></h1>
     </div>
-    <div class="w-44 h-44 bg-black border-4 border-black rounded-full z-10 overflow-hidden absolute left-1/3 top-64">
+    <div class="w-44 h-44 bg-black border-4 border-black rounded-full z-10 overflow-hidden absolute left-1/3 top-40">
         <img src="/profile3.jpg" class="w-full h-full object-cover" alt="">
     </div>
     
-    <div class="write w-2/5 mt-20 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
+    <!-- <div class="write w-2/5 mt-20 h-60 bg-white drop-shadow-md rounded-xl flex items-center flex-wrap">
         
-    </div>
+       
+    </div> -->
 
-    <div class=" w-2/5 h-96   flex gap-6 items-center justify-center">
-        <div class="w-2/4 h-full bg-black drop-shadow-md p-3 rounded-xl flex flex-col items-center ">
-            <h2 class="font-bold text-3xl text-white">Profile Stats<span class="text-orange-500">.</span></h2>
-            <h4></h4>
-            
+    <div class=" w-2/5 h-96 mt-20  flex gap-6 items-center justify-center">
+        <div class="w-2/4 h-full bg-blue-400 drop-shadow-md p-3 rounded-xl flex flex-col justify-between ">
+            <h2 class="font-bold text-6xl text-white ">Bio<span class="text-orange-500">.</span></h2>
+            <p class="text-white -mt-16 text-3xl font-thin">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, commodi voluptatem sint .</p>
+            <button class="bg-white  text-black px-3 py-1 text-xl rounded-md font-medium w-32 self-end">Log out<span class="text-orange-500">.</span></button>
          </div>
-        <div class="w-2/4 h-full bg-black drop-shadow-md p-3 rounded-xl flex flex-col justify-between">
+        <div class="w-2/4 h-full bg-zinc-500 drop-shadow-md p-3 rounded-xl flex flex-col justify-between">
            <h2 class="font-bold text-6xl text-white">Featured Status<span class="text-orange-500">.</span></h2>
            <p class="text-white -mt-16 text-3xl font-thin">"Our greatest glory is not in never falling, but in rising every time we fall".</p>
-           <button class="bg-white  text-black px-3 py-1 text-xl rounded-sm font-medium w-40 self-end">Change Status<span class="text-orange-500">.</span></button>
+           <button class="bg-white  text-black px-3 py-1 text-xl rounded-md font-medium w-40 self-end">Change Status<span class="text-orange-500">.</span></button>
         </div>
     </div>
 
-    <div class="write w-2/5 mt-20 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
+    <div class="write w-2/5 mt-6 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
         <div class="flex items-center gap-2 self-start">
             <div class="profile">
                 <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="profile3.jpg" class="w-full h-full object-cover" alt=""></div>
@@ -70,6 +71,125 @@
         </div>
         <textarea name="" id="" class="border-b-2 w-full h-2/4 p-2 text-xl rounded-xl outline-none" placeholder="Whats on your mind, John?" ></textarea>
         <button class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
+    </div>
+
+    <div class=" w-2/5 mt-3 h-20 bg-zinc-900 rounded-xl p-3 flex   items-center justify-center">
+        <h2 class="font-bold text-white text-3xl">Your Posts<span class="text-orange-500 text-4xl">.</span></h2>
+    </div>
+
+    <div class="read w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
+        
+        <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3">
+
+            <div class="flex items-center gap-2">
+                <div class="profile-pic">
+                    <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="profile3.jpg" class="w-full h-full object-cover"  alt=""></div>
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-lg font-normal text-blue-600">John Doe</h2>
+                    <h4 class="text-xs">02-Jul-23</h4>
+                </div>
+            </div>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam et corporis, m</p>
+                
+            </div>
+           
+            <div class="btns border-t-2 flex justify-between px-4 py-1">
+
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class=" py-1"> <img src="/like.png" class="w-5" alt=""></div>
+                    <h4 class="font-thin">36</h4>
+                </div>
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/love.png" class="w-5" alt=""></div>
+                    <h4 class="font-thin">11</h4>
+                </div>
+                <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/share.png" class="w-5" alt=""></div>
+                </div>
+               
+               
+                
+                
+            </div>
+        </div>
+        <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3">
+
+            <div class="flex items-center gap-2">
+                <div class="profile-pic">
+                    <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="profile3.jpg" class="w-full h-full object-cover"  alt=""></div>
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-lg font-normal text-blue-600">John Doe</h2>
+                    <h4 class="text-xs">03-Dec-22</h4>
+                </div>
+            </div>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam et corporis, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, eum.</p>
+                
+            </div>
+           
+            <div class="btns border-t-2 flex justify-between px-4 py-1">
+
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class=" py-1"> <img src="/like.png" class="w-5" alt=""></div>
+                    <h4 class="font-thin">16</h4>
+                </div>
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/love.png" class="w-5" alt=""></div>
+                    <h4 class="font-thin">05</h4>
+                </div>
+                <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/share.png" class="w-5" alt=""></div>
+                </div>
+                
+               
+               
+                
+                
+            </div>
+        </div>
+        <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3">
+
+            <div class="flex items-center gap-2">
+                <div class="profile-pic">
+                    <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="profile3.jpg" class="w-full h-full object-cover"  alt=""></div>
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-lg font-normal text-blue-600">John Doe</h2>
+                    <h4 class="text-xs">13-Mar-23</h4>
+                </div>
+            </div>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam et corporis, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, eum Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, vero!</p>
+                
+            </div>
+           
+            <div class="btns border-t-2 flex justify-between px-4 py-1">
+
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class=" py-1"> <img src="/liked.png" class="w-5" alt=""></div>
+                    <h4 class="font-thin">54</h4>
+                </div>
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/love.png" class="w-5" alt=""></div>
+                    <h4 class="font-thin">31</h4>
+                </div>
+                <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/share.png" class="w-5" alt=""></div>
+                </div>
+                
+               
+               
+                
+                
+            </div>
+        </div>
+
+        
+       
+        
     </div>
    </main>
 
