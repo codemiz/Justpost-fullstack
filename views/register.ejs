@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="/css/styles.css"> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
     <title>Sign up on justPost</title>
 </head>
 <body>
@@ -22,17 +22,17 @@
                 <h1 class="font-bold text-5xl">Sign Up Now<span class="text-orange-500">.</span></h1>
 
             </div>
-            <form action="" class="flex flex-col gap-8 m-8 text-xl">
+            <form action="/user/signup" method="post" class="flex flex-col gap-8 m-8 text-xl">
                 
-                <input type="text" name="name" class="border-b-2  border-zinc-400 w-4/5 outline-none bg-transparent" placeholder="Write your name">
+                <input type="text" name="name" class="border-b-2  border-zinc-400 w-4/5 outline-none bg-transparent" placeholder="Enter your name">
 
-                <input type="text" name="username" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Usernamee">
+                <input type="text" name="username" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Set a unique username">
 
                 <input type="email" name="email" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Email">
 
                 <input type="password" name="password" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Password">
-
-                <input type="date" name="age" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Age">
+                
+                <input type="number" name="age" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Enter your age in years only i.e 22">
                
                
                 <select name="gender" id="" required class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none">
