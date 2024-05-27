@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const mongoose = require("mongoose");
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -15,24 +16,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}))
 
 //main routes
-app.get('/',isLoggedIn, (req, res) => {
-  res.render("home")
+app.get('/',isLoggedIn, async (req, res) => {
+  const user = await userModel.findOne({_id:req.user.id});
+  res.render("home",{user})
   
   
 });
 app.get('/register', (req, res) => {
   res.render('register');
 });
+app.get('/logout', (req, res) => {
+  
+  res.cookie("token","")
+  res.redirect('/login');
+});
 
 app.get('/login', (req, res) => {
-  let token =  jwt.sign({email:"email.com"},process.env.JWT_SECRET);
-  console.log(token);
-  res.cookie("token",token)
+ 
   res.render('login');
 });
 
-app.get('/profile', (req, res) => {
-  res.render('profile');
+app.get('/profile',isLoggedIn,async (req, res) => {
+  console.log(req.user);
+  const user = await userModel.findOne({_id:req.user.id});
+  console.log(user);
+  res.render('profile',{user});
 });
 
 //Api routes
@@ -44,6 +52,7 @@ app.post("/user/signup", async (req,res)=>{
     username,
     email,
     password,
+    profilePic:"profile_default.jpg",
     age,
     gender
   })
@@ -61,9 +70,10 @@ function isLoggedIn(req,res,next){
     console.log(req.cookies)
     res.render("login")
   }else{
-    console.log(req.cookies);
+    // console.log(req.cookies);
     let data= jwt.verify(req.cookies.token,process.env.JWT_SECRET);
     console.log(data);
+    req.user = data;
     next();
   }
   

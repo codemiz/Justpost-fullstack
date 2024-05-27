@@ -19,7 +19,7 @@
                 <a href="/profile">
                     <li class="hover:bg-zinc-100 px-6  border-zinc-200  border-b-2  py-2 cursor-pointer"><img src="/user-sel.png" class="w-9" alt=""></li>
                 </a>
-                <a href="/login">
+                <a href="/logout">
                     <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/sign-out.png" class="w-9" alt=""></li>
                 </a>
             </ul>
@@ -28,7 +28,7 @@
         <div class="flex gap-5 items-center">
             <div class="searchbar"><input type="search" class="border-2 border-zinc-300 py-2 px-3 rounded-full outline-none w-64" placeholder="Search posts"></div>
            <div class="profile">
-                <div class="w-16 h-16 bg-black rounded-full overflow-hidden"> <img src="profile3.jpg" class="object-cover w-full h-full" alt=""></div>
+                <div class="w-16 h-16 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="object-cover w-full h-full" alt=""></div>
             </div> 
             
         </div>
@@ -38,10 +38,10 @@
    <main class="flex flex-col gap-6 items-center mt-7">
     <div class=" w-2/5 h-48  bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center justify-end">
         
-        <h1 class="font-bold text-white text-5xl">John Doe<span class="text-orange-500">.</span></h1>
+        <h1 class="font-bold text-white text-5xl"><%= user.name %><span class="text-orange-500">.</span></h1>
     </div>
     <div class="w-44 h-44 bg-black border-4 border-black rounded-full z-10 overflow-hidden absolute left-1/3 top-48">
-        <img src="/profile3.jpg" class="w-full h-full object-cover" alt="">
+        <img src="/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
     </div>
     
     <!-- <div class="write w-2/5 mt-20 h-60 bg-white drop-shadow-md rounded-xl flex items-center flex-wrap">
@@ -57,11 +57,11 @@
                 <div class="flex gap-5">
                     <div class="flex gap-2 items-center">
                         <div class=" py-1"> <img src="/gender.png" class="w-5" alt=""></div>
-                        <h4 class="font-thin">Male</h4>
+                        <h4 class="font-thin"><%= user.gender %></h4>
                     </div>
                     <div class="flex gap-2 items-center">
                         <div class=" py-1"> <img src="/calendar.png" class="w-5" alt=""></div>
-                        <h4 class="font-thin">22 Yrs old</h4>
+                        <h4 class="font-thin"><%= user.age %> Yrs old</h4>
                     </div>
 
                 </div>
