@@ -87,17 +87,22 @@
         </div>
     </div>
 
+    
     <div class="write w-2/5 mt-6 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
         <div class="flex items-center gap-2 self-start">
             <div class="profile">
-                <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="profile3.jpg" class="w-full h-full object-cover" alt=""></div>
+                <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
             </div>
-            <h2 class="text-xl font-semibold">John Doe</h2>
+            <h2 class="text-xl font-semibold"><%= user.name %></h2>
         </div>
-        <textarea name="" id="" class="border-b-2 w-full h-2/4 p-2 text-xl rounded-xl outline-none" placeholder="Whats on your mind, John?" ></textarea>
-        <button class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
-    </div>
-
+        
+        <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/user/post" method="post">
+            <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
+            <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
+        </form>
+       
+        </div>
+        
     <div class=" w-2/5 mt-3 h-20 bg-zinc-900 rounded-xl p-3 flex   items-center justify-center">
         <h2 class="font-bold text-white text-3xl">Your Posts<span class="text-orange-500 text-4xl">.</span></h2>
     </div>

@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const userModel = require("./models/user");
+const postModel = require("./models/post");
 const cookieParser = require('cookie-parser');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const post = require('./models/post');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -32,7 +34,6 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
- 
   res.render('login');
 });
 
@@ -61,7 +62,27 @@ app.post("/user/signup", async (req,res)=>{
   res.cookie("token",token)
   res.redirect("/")
 })
+app.post("/user/login", async (req,res)=>{
+  const {email,password} = req.body;
+  
+  const oldUser =await userModel.findOne({email})
+  console.log(oldUser);
+  let token =  jwt.sign({email: email, id:oldUser._id},process.env.JWT_SECRET);
+  res.cookie("token",token)
+  res.redirect("/")
+})
 
+app.post("/user/post",isLoggedIn, async (req,res)=>{
+  const postContent = req.body.content;
+  const user = await userModel.findOne({_id:req.user.id});
+  const newPost = await postModel.create({
+    content : postContent,
+    userId:user._id,
+    autherName: user.name
+  })
+  console.log(newPost);
+  res.redirect("/profile")
+})
 
 //loggedin check
 function isLoggedIn(req,res,next){

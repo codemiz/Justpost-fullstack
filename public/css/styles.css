@@ -670,6 +670,10 @@ video {
   height: 100vh;
 }
 
+.h-3\/4 {
+  height: 75%;
+}
+
 .min-h-20 {
   min-height: 5rem;
 }
@@ -744,6 +748,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .cursor-pointer {
@@ -928,6 +936,11 @@ video {
 .bg-zinc-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+}
+
+.bg-zinc-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(113 113 122 / var(--tw-bg-opacity));
 }
 
 .object-cover {
