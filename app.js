@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const userModel = require("./models/user")
-const cookieParser = require('cookie-parser')
+const userModel = require("./models/user");
+const cookieParser = require('cookie-parser');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -13,12 +15,8 @@ app.use(express.urlencoded({extended:true}))
 
 //main routes
 app.get('/',isLoggedIn, (req, res) => {
-  if(isLoggedIn){
-    res.render("home")
-  }else{
-    res.render("login");
-
-  }
+  res.render("home")
+  
   
 });
 app.get('/register', (req, res) => {
@@ -26,17 +24,20 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+  let token =  jwt.sign({email:"email.com"},"shhh");
+  console.log(token);
+  res.cookie("token",token)
   res.render('login');
 });
 
 app.get('/profile', (req, res) => {
-  console.log(req.cookies.token)
   res.render('profile');
 });
 
 //Api routes
 app.post("/user/signup",(req,res)=>{
   const {name,username,email,password,age,gender} = req.body;
+
   const newUser = userModel.create({
     name,
     username,
@@ -45,15 +46,24 @@ app.post("/user/signup",(req,res)=>{
     age,
     gender
   })
+
   console.log(req.body);
   res.redirect("/")
 })
 
 
 //loggedin check
-function isLoggedIn(){
+function isLoggedIn(req,res,next){
   
-    return true
+  if(req.cookies.token==="" || !req.cookies.token){
+    console.log(req.cookies)
+    res.render("login")
+  }else{
+    console.log(req.cookies);
+    let data= jwt.verify(req.cookies.token,"shhh");
+    console.log(data);
+    next();
+  }
   
 }
 
