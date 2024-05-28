@@ -20,7 +20,8 @@ app.use(express.urlencoded({extended:true}))
 //main routes
 app.get('/',isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({_id:req.user.id});
-  res.render("home",{user})
+  const posts = await postModel.find();
+  res.render("home",{user,posts})
   
   
 });
@@ -38,8 +39,8 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile',isLoggedIn,async (req, res) => {
-  console.log(req.user);
-  const user = await userModel.findOne({_id:req.user.id});
+  
+  const user = await userModel.findOne({_id:req.user.id}).populate("posts");
   console.log(user);
   res.render('profile',{user});
 });
@@ -77,9 +78,11 @@ app.post("/user/post",isLoggedIn, async (req,res)=>{
   const user = await userModel.findOne({_id:req.user.id});
   const newPost = await postModel.create({
     content : postContent,
-    userId:user._id,
+    userID:user._id,
     autherName: user.name
   })
+  await user.posts.push(newPost._id);
+  user.save();
   console.log(newPost);
   res.redirect("/profile")
 })
@@ -93,7 +96,7 @@ function isLoggedIn(req,res,next){
   }else{
     // console.log(req.cookies);
     let data= jwt.verify(req.cookies.token,process.env.JWT_SECRET);
-    console.log(data);
+    // console.log(data);
     req.user = data;
     next();
   }
