@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const postSchema = mongoose.Schema({
     content:String,
     date:{
-        type:Date,
-        default: Date.now()
+        type:String,
+        required:true
     },
     userID: {
         type: mongoose.Schema.Types.ObjectId,

@@ -17,6 +17,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}))
 
+
 //main routes
 app.get('/',isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({_id:req.user.id});
@@ -41,7 +42,7 @@ app.get('/login', (req, res) => {
 app.get('/profile',isLoggedIn,async (req, res) => {
   
   const user = await userModel.findOne({_id:req.user.id}).populate("posts");
-  console.log(user);
+  
   res.render('profile',{user});
 });
 
@@ -74,6 +75,24 @@ app.post("/user/login", async (req,res)=>{
 })
 
 app.post("/user/post",isLoggedIn, async (req,res)=>{
+  let cdate= new Date();
+  let date= cdate.toLocaleString();
+  console.log(date);
+  const postContent = req.body.content;
+  const user = await userModel.findOne({_id:req.user.id});
+  const newPost = await postModel.create({
+    content : postContent,
+    date,
+    userID:user._id,
+    autherName: user.name
+  })
+  await user.posts.push(newPost._id);
+  user.save();
+  console.log(newPost);
+  res.redirect("/profile")
+})
+app.post("/user/home/post",isLoggedIn, async (req,res)=>{
+ 
   const postContent = req.body.content;
   const user = await userModel.findOne({_id:req.user.id});
   const newPost = await postModel.create({
@@ -84,9 +103,62 @@ app.post("/user/post",isLoggedIn, async (req,res)=>{
   await user.posts.push(newPost._id);
   user.save();
   console.log(newPost);
-  res.redirect("/profile")
+  res.redirect("/")
 })
 
+//homepage reacts
+app.get("/home/like/:id", isLoggedIn,async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.id});
+  if (post.likes.indexOf(req.user.id)===-1){
+    post.likes.push(req.user.id);
+
+  }else{
+    post.likes.splice(post.likes.indexOf(req.user.id),1)
+  }
+  await post.save();
+  console.log(req.user);
+ res.redirect("/")
+})
+
+app.get("/home/react/:id", isLoggedIn,async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.id});
+  if (post.hearts.indexOf(req.user.id)===-1){
+    post.hearts.push(req.user.id);
+
+  }else{
+    post.hearts.splice(post.likes.indexOf(req.user.id),1)
+  }
+  await post.save();
+  
+ res.redirect("/")
+})
+
+//profile reacts
+app.get("/like/:id", isLoggedIn,async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.id});
+  if (post.likes.indexOf(req.user.id)===-1){
+    post.likes.push(req.user.id);
+
+  }else{
+    post.likes.splice(post.likes.indexOf(req.user.id),1)
+  }
+  await post.save();
+  console.log(req.user);
+ res.redirect("/profile")
+})
+
+app.get("/react/:id", isLoggedIn,async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.id});
+  if (post.hearts.indexOf(req.user.id)===-1){
+    post.hearts.push(req.user.id);
+
+  }else{
+    post.hearts.splice(post.likes.indexOf(req.user.id),1)
+  }
+  await post.save();
+  
+ res.redirect("/profile")
+})
 //loggedin check
 function isLoggedIn(req,res,next){
   

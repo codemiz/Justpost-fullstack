@@ -109,18 +109,26 @@
 
     <div class="read w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
         
-        <% user.posts.forEach(element => {%>
+        <% user.posts.reverse().forEach(element => {%>
             
             <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3">
     
-                <div class="flex items-center gap-2">
-                    <div class="profile-pic">
-                        <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
+                <div class="flex items-center gap-2 justify-between">
+                    <div class="flex gap-2 items-center">
+
+                        <div class="profile-pic">
+                            <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
+                        </div>
+                        <div class="flex flex-col">
+                            <h2 class="text-lg font-normal text-blue-600"><%= user.name %></h2>
+                            <h4 class="text-xs"><%= element.date %></h4>
+                        </div>
                     </div>
-                    <div class="flex flex-col">
-                        <h2 class="text-lg font-normal text-blue-600"><%= user.name %></h2>
-                        <h4 class="text-xs"><%= element.date %></h4>
-                    </div>
+                    
+                        <div class="w-8 justify-self-end hover:cursor-pointer"> 
+                            <img src="/dots.png" class="w-full h-full object-cover"  alt="">
+                        </div>
+                    
                 </div>
                 <div class="content">
                     <p><%= element.content %></p>
@@ -130,12 +138,16 @@
                 <div class="btns border-t-2 flex justify-between px-4 py-1">
     
                     <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
-                        <div class=" py-1"> <img src="/like.png" class="w-5" alt=""></div>
-                        <h4 class="font-thin">36</h4>
+                        <a href="/like/<%= element._id %>">
+                            <div class=" py-1"> <img src="<%= element.likes.indexOf(user._id) === -1 ? "/like.png" : "/liked.png" %>" class="w-5" alt=""></div>
+                        </a>
+                        <h4 class="font-thin"><%= element.likes.length %></h4>
                     </div>
                     <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
-                        <div class="  py-2"> <img src="/love.png" class="w-5" alt=""></div>
-                        <h4 class="font-thin">11</h4>
+                        <a href="/react/<%= element._id %>">
+                            <div class="  py-2"> <img src="<%= element.hearts.indexOf(user._id) === -1 ? "/love.png" : "/loved.png" %>" class="w-5" alt=""></div>
+                        </a>
+                        <h4 class="font-thin"><%= element.hearts.length %></h4>
                     </div>
                     <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
                         <div class="  py-2"> <img src="/share.png" class="w-5" alt=""></div>
