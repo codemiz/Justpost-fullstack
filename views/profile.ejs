@@ -45,8 +45,8 @@
         <h2 class="text-xl font-semibold"><%= user.name %></h2>
     </div>
     
-    <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/user/home/post" method="post">
-        <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
+    <form class="w-full h-3/4 flex gap-3 flex-col items-center"  method="post">
+        <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none"></textarea>
         <div>
             <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelEdit()">Cancel</button>
             <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
@@ -133,11 +133,11 @@
             
             <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3" id>
                 
-                <div class="panel w-36 h-28 bg-zinc-50 absolute drop-shadow-lg self-end hidden" id="<%= element._id %>">
+                <div class="panel w-36 h-28 bg-zinc-50 absolute drop-shadow-lg self-end hidden hover:cursor-pointer" id="<%= element._id %>">
                    
                         <div class="w-full h-1/3 border-b-2 border-zinc-300 flex items-center font-sans font-medium p-2 hover:bg-zinc-200" onclick="editClick('<%= element._id %>')"><p>Edit post</p></div>
                     
-                    <a href="">
+                    <a href="/post/delete/<%= element._id %>">
                         <div class="w-full h-1/3 border-b-2 border-zinc-300 flex items-center font-sans font-medium p-2 hover:bg-zinc-200"><p>Delete post</p></div>
                     </a>
                     
@@ -208,7 +208,8 @@
     document.getElementById(`${id}`).classList.add("hidden");
    }
    async function editClick(id){
-    document.querySelector(`.edit-box`).classList.remove("invisible");
+    const editBox = document.querySelector(`.edit-box`);
+    editBox.classList.remove("invisible");
     
     console.log(id);
     const response = await fetch(`/post/edit/${id}`);
@@ -216,10 +217,11 @@
     console.log(data)
     const textarea = document.getElementById('edit-area');
     if (textarea) {
-        textarea.value = data.content;
+        textarea.value = data.post.content;
     } else {
         console.error('Textarea element not found');
     }
+    editBox.querySelector("form").action=`post/edit/${id}`
    }
    function cancelEdit(){
     document.querySelector(`.edit-box`).classList.add("invisible");

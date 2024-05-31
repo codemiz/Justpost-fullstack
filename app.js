@@ -166,6 +166,18 @@ app.get("/post/edit/:id",isLoggedIn, async (req,res)=>{
   const post = await postModel.findOne({_id:req.params.id});
   res.json({post})
 })
+app.get("/post/delete/:id",isLoggedIn, async (req,res)=>{
+  await postModel.deleteOne({_id:req.params.id});
+  res.redirect("/profile")
+})
+
+app.post("/post/edit/:id",isLoggedIn, async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.id});
+  post.content = req.body.content;
+  await post.save();
+  
+  res.redirect("/profile")
+})
 //loggedin check
 function isLoggedIn(req,res,next){
   
