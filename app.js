@@ -112,7 +112,14 @@ app.post("/user/home/post",isLoggedIn, async (req,res)=>{
 app.get("/home/like/:id", isLoggedIn,async (req,res)=>{
   const post = await postModel.findOne({_id:req.params.id});
   if (post.likes.indexOf(req.user.id)===-1){
-    post.likes.push(req.user.id);
+    if (post.hearts.indexOf(req.user.id)===-1){
+      post.likes.push(req.user.id);
+  
+    }else{
+      post.hearts.splice(post.likes.indexOf(req.user.id),1)
+      post.likes.push(req.user.id);
+    }
+    
 
   }else{
     post.likes.splice(post.likes.indexOf(req.user.id),1)
@@ -125,7 +132,14 @@ app.get("/home/like/:id", isLoggedIn,async (req,res)=>{
 app.get("/home/react/:id", isLoggedIn,async (req,res)=>{
   const post = await postModel.findOne({_id:req.params.id});
   if (post.hearts.indexOf(req.user.id)===-1){
-    post.hearts.push(req.user.id);
+    if (post.likes.indexOf(req.user.id)===-1){
+      post.hearts.push(req.user.id);
+  
+    }else{
+      post.likes.splice(post.likes.indexOf(req.user.id),1)
+      post.hearts.push(req.user.id);
+    }
+    
 
   }else{
     post.hearts.splice(post.likes.indexOf(req.user.id),1)
@@ -139,7 +153,14 @@ app.get("/home/react/:id", isLoggedIn,async (req,res)=>{
 app.get("/like/:id", isLoggedIn,async (req,res)=>{
   const post = await postModel.findOne({_id:req.params.id});
   if (post.likes.indexOf(req.user.id)===-1){
-    post.likes.push(req.user.id);
+    if (post.hearts.indexOf(req.user.id)===-1){
+      post.likes.push(req.user.id);
+  
+    }else{
+      post.hearts.splice(post.likes.indexOf(req.user.id),1)
+      post.likes.push(req.user.id);
+    }
+    
 
   }else{
     post.likes.splice(post.likes.indexOf(req.user.id),1)
@@ -152,7 +173,14 @@ app.get("/like/:id", isLoggedIn,async (req,res)=>{
 app.get("/react/:id", isLoggedIn,async (req,res)=>{
   const post = await postModel.findOne({_id:req.params.id});
   if (post.hearts.indexOf(req.user.id)===-1){
-    post.hearts.push(req.user.id);
+    if (post.likes.indexOf(req.user.id)===-1){
+      post.hearts.push(req.user.id);
+  
+    }else{
+      post.likes.splice(post.likes.indexOf(req.user.id),1)
+      post.hearts.push(req.user.id);
+    }
+    
 
   }else{
     post.hearts.splice(post.likes.indexOf(req.user.id),1)
