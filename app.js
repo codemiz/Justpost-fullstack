@@ -92,11 +92,13 @@ app.post("/user/post",isLoggedIn, async (req,res)=>{
   res.redirect("/profile")
 })
 app.post("/user/home/post",isLoggedIn, async (req,res)=>{
- 
+  let cdate= new Date();
+  let date= cdate.toLocaleString();
   const postContent = req.body.content;
   const user = await userModel.findOne({_id:req.user.id});
   const newPost = await postModel.create({
     content : postContent,
+    date,
     userID:user._id,
     autherName: user.name
   })
@@ -159,6 +161,11 @@ app.get("/react/:id", isLoggedIn,async (req,res)=>{
   
  res.redirect("/profile")
 })
+
+app.get("/post/edit/:id",isLoggedIn, async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.id});
+  res.json({data:post})
+})
 //loggedin check
 function isLoggedIn(req,res,next){
   
@@ -179,3 +186,4 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
