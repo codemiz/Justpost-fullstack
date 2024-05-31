@@ -164,7 +164,7 @@ app.get("/react/:id", isLoggedIn,async (req,res)=>{
 
 app.get("/post/edit/:id",isLoggedIn, async (req,res)=>{
   const post = await postModel.findOne({_id:req.params.id});
-  res.json({data:post})
+  res.json({post})
 })
 //loggedin check
 function isLoggedIn(req,res,next){

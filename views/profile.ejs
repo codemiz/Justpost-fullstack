@@ -46,7 +46,7 @@
     </div>
     
     <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/user/home/post" method="post">
-        <textarea name="content" id="userText" id="edit-box" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
+        <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
         <div>
             <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelEdit()">Cancel</button>
             <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
@@ -207,10 +207,19 @@
    function cancelClick(id){
     document.getElementById(`${id}`).classList.add("hidden");
    }
-   function editClick(id){
+   async function editClick(id){
     document.querySelector(`.edit-box`).classList.remove("invisible");
-   
+    
     console.log(id);
+    const response = await fetch(`/post/edit/${id}`);
+    const data = await response.json();
+    console.log(data)
+    const textarea = document.getElementById('edit-area');
+    if (textarea) {
+        textarea.value = data.content;
+    } else {
+        console.error('Textarea element not found');
+    }
    }
    function cancelEdit(){
     document.querySelector(`.edit-box`).classList.add("invisible");
