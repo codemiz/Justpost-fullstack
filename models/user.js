@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema({
     password:String,
     age:Number,
     gender:String,
+    status:String,
     profilePic:String,
     posts:[
 

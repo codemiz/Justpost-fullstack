@@ -28,7 +28,7 @@
         <div class="flex gap-5 items-center">
             <div class="searchbar"><input type="search" class="border-2 border-zinc-300 py-2 px-3 rounded-full outline-none w-64" placeholder="Search posts"></div>
            <div class="profile">
-                <div class="w-16 h-16 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="object-cover w-full h-full" alt=""></div>
+                <div class="w-16 h-16 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="object-cover w-full h-full" alt=""></div>
             </div> 
             
         </div>
@@ -36,11 +36,24 @@
    </Nav>
 
    <main class="flex flex-col gap-6 items-center mt-7">
+    
+    <!-- profile pic box -->
+    <div class="w-2/5 h-32 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 pic-box rounded-xl p-3 flex items-center invisible justify-center"> 
+    
+    <form class="w-full h-3/4 flex gap-3 items-center justify-center" action="/upload/profile/pic"  method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar">
+        <div>
+            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelPicBox()">Cancel</button>
+            <button type="submit" class="bg-zinc-600 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Upload</button>
+        </div>
+        
+    </form>
+</div>
 
     <!-- edit box -->
     <div class="w-2/5 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 edit-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
         <div class="profile">
-            <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
+            <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
         </div>
         <h2 class="text-xl font-semibold"><%= user.name %></h2>
     </div>
@@ -61,8 +74,12 @@
         <h1 class="font-bold text-white text-5xl"><%= user.name %><span class="text-orange-500">.</span></h1>
     </div>
     <div class="w-44 h-44 bg-black border-4 border-black rounded-full z-10 overflow-hidden absolute left-1/3 top-48">
-        <img src="/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
+        <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
     </div>
+    <div class="w-10 h-10 rounded-full bg-zinc-300 border-2 border-zinc-500 flex justify-center items-center relative -left-40 z-10 -top-4 hover:cursor-pointer" onclick="picBoxClick()">
+        <img src="/camera.png" class="w-6 h-6" alt="">
+    </div>
+    
     
     <!-- <div class="write w-2/5 mt-20 h-60 bg-white drop-shadow-md rounded-xl flex items-center flex-wrap">
         
@@ -98,11 +115,12 @@
 
                 </div>
             </div>
+            
             <button class="bg-black  text-white px-3 py-1 text-xl rounded-md font-medium w-32 self-end">Log out<span class="text-orange-500">.</span></button>
          </div>
         <div class="w-2/4 h-full bg-blue-400 drop-shadow-md p-3 rounded-xl flex flex-col justify-between">
            <h2 class="font-bold text-6xl text-white">Featured Status<span class="text-orange-500">.</span></h2>
-           <p class="text-white -mt-16 text-3xl font-thin">"Our greatest glory is not in never falling, but in rising every time we fall".</p>
+           <p class="text-white -mt-16 text-3xl font-thin"><%= user.status %></p>
            <button class="bg-black  text-white px-3 py-1 text-xl rounded-md font-medium w-28 self-end">Change<span class="text-orange-500">.</span></button>
         </div>
     </div>
@@ -111,7 +129,7 @@
     <div class="write w-2/5 mt-6 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
         <div class="flex items-center gap-2 self-start">
             <div class="profile">
-                <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
+                <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
             </div>
             <h2 class="text-xl font-semibold"><%= user.name %></h2>
         </div>
@@ -148,7 +166,7 @@
                     <div class="flex gap-2 items-center">
 
                         <div class="profile-pic">
-                            <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/<%= user.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
+                            <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
                         </div>
                         <div class="flex flex-col">
                             <h2 class="text-lg font-normal text-blue-600"><%= user.name %></h2>
@@ -223,8 +241,15 @@
     }
     editBox.querySelector("form").action=`post/edit/${id}`
    }
+
    function cancelEdit(){
     document.querySelector(`.edit-box`).classList.add("invisible");
+   }
+   function picBoxClick(){
+    document.querySelector(`.pic-box`).classList.remove("invisible");
+   }
+   function cancelPicBox(){
+    document.querySelector(`.pic-box`).classList.add("invisible");
    }
 </script>
 </body>

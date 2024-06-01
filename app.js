@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const multer= require("multer")
 const userModel = require("./models/user");
 const postModel = require("./models/post");
 const cookieParser = require('cookie-parser');
@@ -17,11 +18,24 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}))
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Math.round(Math.random() * 1000000)+ path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 //main routes
 app.get('/',isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({_id:req.user.id});
-  const posts = await postModel.find();
+  const posts = await postModel.find().populate("userID");
+  console.log(user);
+  console.log(posts);
   res.render("home",{user,posts})
   
   
@@ -47,6 +61,13 @@ app.get('/profile',isLoggedIn,async (req, res) => {
 });
 
 //Api routes
+app.post("/upload/profile/pic",isLoggedIn,upload.single('avatar'), async (req,res)=>{
+  const user = await userModel.findOne({_id:req.user.id});
+
+  user.profilePic = req.file.filename;
+  await user.save();
+  res.redirect("/profile")
+})
 app.post("/user/signup", async (req,res)=>{
   const {name,username,email,password,age,gender} = req.body;
   
@@ -57,7 +78,8 @@ app.post("/user/signup", async (req,res)=>{
     password,
     profilePic:"profile_default.jpg",
     age,
-    gender
+    gender,
+    status:"Upload your first status update."
   })
   console.log(newUser);
   let token =  jwt.sign({email: email, id:newUser._id},process.env.JWT_SECRET);
