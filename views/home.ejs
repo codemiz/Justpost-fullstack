@@ -11,17 +11,20 @@
         <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
         
     </div>
+
+    <!-- navbar -->
    <Nav>
-    <div class="w-full h-20 bg-white drop-shadow-md flex p-3 justify-between items-center">
+    <div class="w-full min-h-20 bg-white drop-shadow-md flex p-3 gap-3 justify-between flex-col md:flex-row items-center">
         <h1 class="uppercase font-black text-4xl">justpost<span class="text-orange-500">.</span></h1>
 
-        <div class="ml-28">
-            <ul class="flex gap-32 text-2xl font-medium">
+
+        <div class="lg:ml-28">
+            <ul class="flex md:gap-32 gap-16 text-2xl font-medium">
                 <a href="/">
                     <li class="hover:bg-zinc-100 px-6 border-zinc-200  border-b-2 py-2 cursor-pointer"><img src="/home-sel.png" class="w-9" alt=""></li>
                 </a>
                 <a href="/profile">
-                    <li class="hover:bg-zinc-100 px-6    py-2 cursor-pointer"><img src="/user.png" class="w-9" alt=""></li>
+                    <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/user.png" class="w-9" alt=""></li>
                 </a>
                 <a href="/logout">
                     <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/sign-out.png" class="w-9" alt=""></li>
@@ -29,7 +32,7 @@
             </ul>
         </div>
 
-        <div class="flex gap-5 items-center">
+        <div class="gap-5 items-center hidden md:flex">
             <div class="searchbar"><input type="search" class="border-2 border-zinc-300 py-2 px-3 rounded-full outline-none w-64" placeholder="Search posts"></div>
            <div class="profile">
                 <div class="w-16 h-16 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="object-cover w-full h-full" alt=""></div>
@@ -38,9 +41,12 @@
         </div>
     </div>
    </Nav>
+<!-- navbar -->
 
    <main class="flex flex-col gap-6 items-center mt-7">
-   <div class="write w-2/5 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
+    
+    <!--post  write -->
+    <div class="write w-11/12 lg:w-2/5 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
         <div class="flex items-center gap-2 self-start">
             <div class="profile">
                 <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
@@ -52,10 +58,11 @@
             <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
             <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
         </form>
-       
-        </div>
-
-    <div class="read w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
+        
+    </div>
+    <!--post  write -->
+    
+    <div class="read w-11/12 lg:w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
         <% posts.reverse().forEach(element => {%>
         
        
