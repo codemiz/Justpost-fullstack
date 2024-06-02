@@ -803,6 +803,10 @@ video {
   min-height: 24rem;
 }
 
+.min-h-56 {
+  min-height: 14rem;
+}
+
 .w-1\/2 {
   width: 50%;
 }
