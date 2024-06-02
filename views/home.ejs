@@ -7,6 +7,10 @@
     <title>JustPost.</title>
 </head>
 <body class="bg-zinc-100">
+    <div class="copy-notice w-96 h-20 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
+        <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
+        
+    </div>
    <Nav>
     <div class="w-full h-20 bg-white drop-shadow-md flex p-3 justify-between items-center">
         <h1 class="uppercase font-black text-4xl">justpost<span class="text-orange-500">.</span></h1>
@@ -16,7 +20,7 @@
                 <a href="/">
                     <li class="hover:bg-zinc-100 px-6 border-zinc-200  border-b-2 py-2 cursor-pointer"><img src="/home-sel.png" class="w-9" alt=""></li>
                 </a>
-                <a href="profile">
+                <a href="/profile">
                     <li class="hover:bg-zinc-100 px-6    py-2 cursor-pointer"><img src="/user.png" class="w-9" alt=""></li>
                 </a>
                 <a href="/logout">
@@ -62,7 +66,10 @@
                     <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= element.userID.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
                 </div>
                 <div class="flex flex-col">
-                    <h2 class="text-lg font-normal text-blue-600"><%= element.autherName %></h2>
+                    <a href="/<%=element.userID.username %>">
+                        <h2 class="text-lg font-normal text-blue-600"><%= element.autherName %></h2>
+                    </a>
+                        
                     <h4 class="text-xs"><%= element.date %></h4>
                 </div>
             </div>
@@ -85,7 +92,7 @@
                     </a>
                     <h4 class="font-thin"><%= element.hearts.length %></h4>
                 </div>
-                <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer" onclick="showNote('<%= element._id %>')">
                     <div class="  py-2"> <img src="/share.png" class="w-5" alt=""></div>
                 </div>
                 
@@ -102,5 +109,16 @@
         
     </div>
    </main>
+
+   <script>
+    function showNote(id){
+    document.querySelector(`.copy-notice`).classList.remove("invisible");
+    navigator.clipboard.writeText(`http://localhost:3000/post/${id}`)
+    setTimeout(()=>{
+        document.querySelector(`.copy-notice`).classList.add("invisible");
+    },1000)
+   }
+
+   </script>
 </body>
 </html>

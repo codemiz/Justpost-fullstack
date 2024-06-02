@@ -11,7 +11,7 @@
     <div class="w-full h-20 bg-white drop-shadow-md flex p-3 justify-between items-center">
         <h1 class="uppercase font-black text-4xl">justpost<span class="text-orange-500">.</span></h1>
 
-        <div class="ml-28">
+        <div>
             <ul class="flex gap-32 text-2xl font-medium">
                 <a href="/">
                     <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/home.png" class="w-9" alt=""></li>
@@ -27,77 +27,37 @@
 
         <div class="flex gap-5 items-center">
             <div class="searchbar"><input type="search" class="border-2 border-zinc-300 py-2 px-3 rounded-full outline-none w-64" placeholder="Search posts"></div>
-           <div class="profile">
-                <div class="w-16 h-16 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="object-cover w-full h-full" alt=""></div>
-            </div> 
+            
             
         </div>
     </div>
    </Nav>
 
    <main class="flex flex-col gap-6 items-center mt-7">
-    <% let totalLikes = 0;
-        let totalReacts=0;
-        user.posts.forEach(elem=>{
-            totalLikes+=elem.likes.length;
-            totalReacts+=elem.hearts.length;
-        })
-        %>
-
-<div class="copy-notice w-96 h-20 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
-    <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
+    <% 
+    let totalLikes = 0;
+    let totalReacts = 0;
     
-</div>
+    if (user && user.posts) {
+        user.posts.forEach(elem => {
+            if (elem.likes) totalLikes += elem.likes.length;
+            if (elem.hearts) totalReacts += elem.hearts.length;
+        });
+    }
+%>
     
     <!-- profile pic box -->
-    <div class="w-2/5 h-32 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 pic-box rounded-xl p-3 flex items-center invisible justify-center"> 
-    
-    <form class="w-full h-3/4 flex gap-3 items-center justify-center" action="/upload/profile/pic"  method="post" enctype="multipart/form-data">
-        <input type="file" name="avatar" required>
-        <div>
-            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelPicBox()">Cancel</button>
-            <button type="submit" class="bg-zinc-600 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Upload</button>
-        </div>
+   
+    <div class="copy-notice w-96 h-20 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
+        <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
         
-    </form>
-</div>
-
-    <!-- edit box -->
-    <div class="w-2/5 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 edit-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
-        <div class="profile">
-            <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
-        </div>
-        <h2 class="text-xl font-semibold"><%= user.name %></h2>
     </div>
-    
-    <form class="w-full h-3/4 flex gap-3 flex-col items-center"  method="post">
-        <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none"></textarea>
-        <div>
-            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelEdit()">Cancel</button>
-            <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
-        </div>
-        
-    </form>
-</div>
+    <!-- edit box -->
+   
     <!-- edit box -->
 
     <!-- status box -->
-    <div class="w-2/5 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-20 transform -translate-x-1/2 -translate-y-1/2 status-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
-        <div class="profile">
-            <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
-        </div>
-        <h2 class="text-xl font-semibold"><%= user.name %>'s <span class="font-bold">Status</span></h2>
-    </div>
-    
-    <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/upload/status"  method="post">
-        <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none" placeholder="Start writing" required maxlength="100"></textarea>
-        <div>
-            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelStatusBox()">Cancel</button>
-            <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
-        </div>
-        
-    </form>
-</div>
+   
     <!-- status box -->
 
     <div class=" w-2/5 h-48  bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3  items-end justify-center">
@@ -107,9 +67,7 @@
     <div class="w-44 h-44 bg-black border-4 border-black rounded-full z-10 overflow-hidden absolute left-1/3 top-48">
         <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
     </div>
-    <div class="w-10 h-10 rounded-full bg-zinc-300 border-2 border-zinc-500 flex justify-center items-center relative -left-40 z-10 -top-4 hover:cursor-pointer" onclick="picBoxClick()">
-        <img src="/camera.png" class="w-6 h-6" alt="">
-    </div>
+    
     
     
     <!-- <div class="write w-2/5 mt-20 h-60 bg-white drop-shadow-md rounded-xl flex items-center flex-wrap">
@@ -147,33 +105,19 @@
                 </div>
             </div>
             
-            <button class="bg-black  text-white px-3 py-1 text-xl rounded-md font-medium w-32 self-end">Log out<span class="text-orange-500">.</span></button>
+            <button class=" text-white px-3 py-1 text-xl rounded-md font-medium w-32 self-end" disabled></button>
          </div>
         <div class="w-2/4 h-full bg-blue-400 drop-shadow-md p-3 rounded-xl flex flex-col justify-between">
            <h2 class="font-bold text-6xl text-white">Featured Status<span class="text-orange-500">.</span></h2>
            <p class="text-white -mt-16 text-3xl font-thin"><%= user.status %></p>
-           <button class="bg-black  text-white px-3 py-1 text-xl rounded-md font-medium w-28 self-end" onclick="StatusBoxClick()">Change<span class="text-orange-500">.</span></button>
+           <button class=" text-white px-3 py-1 text-xl rounded-md font-medium w-28 self-end" disabled></button>
         </div>
     </div>
 
     
-    <div class="write w-2/5 mt-6 h-60 bg-white drop-shadow-md rounded-xl p-3 flex gap-3 flex-col items-center">
-        <div class="flex items-center gap-2 self-start">
-            <div class="profile">
-                <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
-            </div>
-            <h2 class="text-xl font-semibold"><%= user.name %></h2>
-        </div>
-        
-        <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/user/post" method="post">
-            <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
-            <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
-        </form>
-       
-        </div>
         
     <div class=" w-2/5 mt-3 h-20 bg-zinc-900 rounded-xl p-3 flex   items-center justify-center">
-        <h2 class="font-bold text-white text-3xl">Your Posts<span class="text-orange-500 text-4xl">.</span></h2>
+        <h2 class="font-bold text-white text-3xl"><%= user.name %>'s Posts<span class="text-orange-500 text-4xl">.</span></h2>
     </div>
 
     <div class="read w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
@@ -182,17 +126,7 @@
             
             <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3" id>
                 
-                <div class="panel w-36 h-28 bg-zinc-50 absolute drop-shadow-lg self-end hidden hover:cursor-pointer" id="<%= element._id %>">
-                   
-                        <div class="w-full h-1/3 border-b-2 border-zinc-300 flex items-center font-sans font-medium p-2 hover:bg-zinc-200" onclick="editClick('<%= element._id %>')"><p>Edit post</p></div>
-                    
-                    <a href="/post/delete/<%= element._id %>">
-                        <div class="w-full h-1/3 border-b-2 border-zinc-300 flex items-center font-sans font-medium p-2 hover:bg-zinc-200"><p>Delete post</p></div>
-                    </a>
-                    
-                        <div class="w-full h-1/3  flex items-center font-sans font-medium p-2 hover:bg-zinc-200" onclick="cancelClick('<%= element._id %>')"><p>Cancel</p></div>
-                   
-                </div>
+               
                 <div class="flex items-start gap-2 justify-between">
                     <div class="flex gap-2 items-center">
 
@@ -205,9 +139,7 @@
                         </div>
                     </div>
                     
-                        <div class="w-6 justify-self-end hover:cursor-pointer menu" onclick="menuClick('<%= element._id %>')" > 
-                            <img src="/dots.png" class="w-full h-full object-cover"   alt="">
-                        </div>
+                       
                     
                 </div>
                 <div class="content">

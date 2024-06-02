@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>JustPost.</title>
+</head>
+<body class="bg-zinc-100">
+   <Nav>
+    <div class="w-full h-20 bg-white drop-shadow-md flex p-3 justify-between items-center">
+        <h1 class="uppercase font-black text-4xl">justpost<span class="text-orange-500">.</span></h1>
+
+        <div>
+            <ul class="flex gap-32 text-2xl font-medium">
+                <a href="/">
+                    <li class="hover:bg-zinc-100 px-6 border-zinc-200  border-b-2 py-2 cursor-pointer"><img src="/home-sel.png" class="w-9" alt=""></li>
+                </a>
+                <a href="/profile">
+                    <li class="hover:bg-zinc-100 px-6   py-2 cursor-pointer"><img src="/user.png" class="w-9" alt=""></li>
+                </a>
+                <a href="/logout">
+                    <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/sign-out.png" class="w-9" alt=""></li>
+                </a>
+            </ul>
+        </div>
+
+        <div class="flex gap-5 items-center">
+            <div class="searchbar"><input type="search" class="border-2 border-zinc-300 py-2 px-3 rounded-full outline-none w-64" placeholder="Search posts"></div>
+           
+            
+        </div>
+    </div>
+   </Nav>
+
+   <main class="flex flex-col gap-6 items-center mt-7">
+   
+    <div class="read w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
+       
+        
+       
+        <div class="post bg-white w-full min-h-20 px-3 pt-3 flex flex-col rounded-lg justify-between drop-shadow-sm gap-3">
+
+            <div class="flex items-center gap-2">
+                <div class="profile-pic">
+                    <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= post.userID.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
+                </div>
+                <div class="flex flex-col">
+                    <a href="/<%=post.userID.username %>">
+                        <h2 class="text-lg font-normal text-blue-600"><%= post.autherName %></h2>
+                    </a>
+                        
+                    <h4 class="text-xs"><%= post.date %></h4>
+                </div>
+            </div>
+            <div class="content">
+                <p><%= post.content %></p>
+                
+            </div>
+           
+            <div class="btns border-t-2 flex justify-between px-4 py-1">
+                
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <a href="/home/like/<%= post._id %>">
+                        <div class=" py-1"> <img src="/like.png" class="w-5" alt=""></div>
+                    </a>
+                    <h4 class="font-thin"><%= post.likes.length %></h4>
+                </div>
+                <div class="flex gap-2 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <a href="/home/react/<%= post._id %>">
+                        <div class="  py-2"> <img src="/love.png" class="w-5" alt=""></div>
+                    </a>
+                    <h4 class="font-thin"><%= post.hearts.length %></h4>
+                </div>
+                <div class="flex gap-1 justify-center items-center w-1/3 hover:bg-zinc-100 cursor-pointer">
+                    <div class="  py-2"> <img src="/share.png" class="w-5" alt=""></div>
+                </div>
+                
+               
+               
+                
+                
+            </div>
+        </div>
+        
+
+        
+       
+        
+    </div>
+   </main>
+</body>
+</html>

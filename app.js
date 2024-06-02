@@ -34,8 +34,8 @@ const upload = multer({ storage: storage })
 app.get('/',isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({_id:req.user.id});
   const posts = await postModel.find().populate("userID");
-  console.log(user);
-  console.log(posts);
+  // console.log(user);
+  // console.log(posts);
   res.render("home",{user,posts})
   
   
@@ -53,18 +53,43 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
+
 app.get('/profile',isLoggedIn,async (req, res) => {
   
   const user = await userModel.findOne({_id:req.user.id}).populate("posts");
   
   res.render('profile',{user});
 });
+app.get("/:username",async (req,res)=>{
+  try {
+    const user = await userModel.findOne({ username: req.params.username }).populate("posts");
+    if (!user) {
+        return res.status(404).send('User not found');
+    }
+    res.render('public-profile', { user });
+} catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+}
+})
+app.get("/post/:postid",async (req,res)=>{
+  const post = await postModel.findOne({_id:req.params.postid}).populate("userID");
+  console.log(post);
+  res.render('post',{post});
+})
 
 //Api routes
 app.post("/upload/profile/pic",isLoggedIn,upload.single('avatar'), async (req,res)=>{
   const user = await userModel.findOne({_id:req.user.id});
 
   user.profilePic = req.file.filename;
+  await user.save();
+  res.redirect("/profile")
+})
+app.post("/upload/status",isLoggedIn, async (req,res)=>{
+  const user = await userModel.findOne({_id:req.user.id});
+
+  user.status = req.body.content;
   await user.save();
   res.redirect("/profile")
 })
@@ -79,7 +104,7 @@ app.post("/user/signup", async (req,res)=>{
     profilePic:"profile_default.jpg",
     age,
     gender,
-    status:"Upload your first status update."
+    status:"This is default status, you can upload your own status updates."
   })
   console.log(newUser);
   let token =  jwt.sign({email: email, id:newUser._id},process.env.JWT_SECRET);
