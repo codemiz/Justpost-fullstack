@@ -48,26 +48,26 @@
         })
         %>
 
-<div class="copy-notice w-96 h-20 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
-    <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
+    <div class="copy-notice lg:w-96 w-11/12 lg:h-20 h-14 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
+    <h1 class="text-white font-medium lg:text-2xl text-xl">Post link copied to clipboard</h1>
     
-</div>
+    </div>
     
     <!-- profile pic box -->
-    <div class="w-2/5 h-32 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 pic-box rounded-xl p-3 flex items-center invisible justify-center"> 
+    <div class="lg:w-2/5 w-11/12 lg:h-32 h-44 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 pic-box rounded-xl p-3 flex items-center invisible justify-center"> 
     
-    <form class="w-full h-3/4 flex gap-3 items-center justify-center" action="/upload/profile/pic"  method="post" enctype="multipart/form-data">
+    <form class="w-full h-3/4 flex gap-3 items-center flex-col lg:flex-row justify-center" action="/upload/profile/pic"  method="post" enctype="multipart/form-data">
         <input type="file" name="avatar" required>
-        <div>
-            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelPicBox()">Cancel</button>
-            <button type="submit" class="bg-zinc-600 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Upload</button>
+        <div class="flex gap-4 lg:gap-0">
+            <button type="button" class="bg-zinc-50 text-black lg:px-11 px-8 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelPicBox()">Cancel</button>
+            <button type="submit" class="bg-zinc-600 text-white lg:px-11 px-8 rounded-3xl text-2xl font-semibold py-2 self-end">Upload</button>
         </div>
         
     </form>
 </div>
 
     <!-- edit box -->
-    <div class="w-2/5 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 edit-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
+    <div class="lg:w-2/5 w-11/12 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-10 transform -translate-x-1/2 -translate-y-1/2 edit-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
         <div class="profile">
             <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
         </div>
@@ -76,9 +76,9 @@
     
     <form class="w-full h-3/4 flex gap-3 flex-col items-center"  method="post">
         <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none"></textarea>
-        <div>
-            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelEdit()">Cancel</button>
-            <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
+        <div class="flex gap-4 lg:gap-0">
+            <button type="button" class="bg-zinc-50 text-black lg:px-11 px-8 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelEdit()">Cancel</button>
+            <button type="submit" class="bg-blue-400 text-white lg:px-11 px-8 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
         </div>
         
     </form>
@@ -86,7 +86,7 @@
     <!-- edit box -->
 
     <!-- status box -->
-    <div class="w-2/5 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-20 transform -translate-x-1/2 -translate-y-1/2 status-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
+    <div class="lg:w-2/5 w-11/12 h-80 bg-zinc-100 drop-shadow-xl border-2 fixed top-2/4 left-2/4 z-20 transform -translate-x-1/2 -translate-y-1/2 status-box rounded-xl p-3 flex gap-3 flex-col items-center invisible"> <div class="flex items-center gap-2 self-start">
         <div class="profile">
             <div class="w-12 h-12 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt=""></div>
         </div>
@@ -95,9 +95,9 @@
     
     <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/upload/status"  method="post">
         <textarea name="content"  id="edit-area" class="border-b-2 bg-zinc-50 w-full h-4/5 p-2 text-xl rounded-xl outline-none" placeholder="Start writing" required maxlength="100"></textarea>
-        <div>
-            <button type="button" class="bg-zinc-50 text-black px-11 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelStatusBox()">Cancel</button>
-            <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
+        <div class="flex gap-4 lg:gap-0">
+            <button type="button" class="bg-zinc-50 text-black lg:px-11 px-8 border-2 rounded-3xl text-2xl font-semibold py-2 self-end" onclick="cancelStatusBox()">Cancel</button>
+            <button type="submit" class="bg-blue-400 text-white lg:px-11 px-8 rounded-3xl text-2xl font-semibold py-2 self-end">Update</button>
         </div>
         
     </form>
@@ -106,15 +106,15 @@
 
     <!-- profile data -->
     <div class="lg:w-2/5 w-11/12 h-64 drop-shadow-md rounded-xl flex flex-col items-start justify-between relative">
-        <div class="w-full h-40 bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3 items-end justify-center"></div>
+        <div class="w-full h-40 lg:h-48 bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3 items-end justify-center"></div>
 
-        <div class="transform translate-y-1/2 absolute flex items-center gap-3 pl-3">
+        <div class="transform translate-y-1/2 absolute flex items-center gap-3 pl-3 lg:pl-5">
 
             <div class="lg:w-44 lg:h-44 w-36 h-36 bg-black border-4 border-black rounded-full z-10 overflow-hidden   ">
                 <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
             </div>
-            <h1 class="font-bold text-white  text-3xl lg:text-5xl mb-3"><%= user.name %><span class="text-orange-500">.</span></h1>
-            <div class="lg:w-10 lg:h-10 w-8 h-8 rounded-full bg-zinc-300 border-2 border-zinc-500 flex justify-center items-center  z-20  absolute hover:cursor-pointer left-32 top-24" onclick="picBoxClick()">
+            <h1 class="font-bold text-white  text-3xl lg:text-5xl mb-3 lg:mb-6"><%= user.name %><span class="text-orange-500">.</span></h1>
+            <div class="lg:w-10 lg:h-10 w-8 h-8 rounded-full bg-zinc-300 border-2 border-zinc-500 flex justify-center items-center  z-20  absolute hover:cursor-pointer left-32 lg:left-40 top-24 lg:top-28" onclick="picBoxClick()">
                 <img src="/camera.png" class="lg:w-6 lg:h-6 w-4 h-4" alt="">
             </div>
         </div>
@@ -127,7 +127,7 @@
        
     </div> -->
 
-    <div class=" lg:w-2/5 w-11/12 h-96 mt-12 lg:mt-20 flex gap-6 items-center flex-col lg:flex-row justify-center">
+    <div class=" lg:w-2/5 w-11/12 h-96 mt-32 lg:mt-10 flex gap-6 items-center flex-col lg:flex-row justify-center">
         <div class="lg:w-2/4 w-full h-full bg-zinc-200 drop-shadow-md p-3 rounded-xl flex flex-col justify-between ">
             <h2 class="font-bold text-6xl text-black ">Profile Data<span class="text-orange-500">.</span></h2>
             <div class="text-black">
@@ -176,7 +176,7 @@
         </div>
         
         <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/user/post" method="post">
-            <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
+            <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, <%= user.name %>?"></textarea>
             <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
         </form>
        
@@ -288,6 +288,9 @@
    }
    function picBoxClick(){
     document.querySelector(`.pic-box`).classList.remove("invisible");
+   }
+   function cancelPicBox(){
+    document.querySelector(`.pic-box`).classList.add("invisible");
    }
    function StatusBoxClick(){
     document.querySelector(`.status-box`).classList.remove("invisible");

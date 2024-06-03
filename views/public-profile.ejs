@@ -7,17 +7,19 @@
     <title>JustPost.</title>
 </head>
 <body class="bg-zinc-100">
-   <Nav>
-    <div class="w-full h-20 bg-white drop-shadow-md flex p-3 justify-between items-center">
+  <!-- navbar -->
+  <Nav>
+    <div class="w-full min-h-20 bg-white drop-shadow-md flex p-3 gap-3 justify-between flex-col md:flex-row items-center">
         <h1 class="uppercase font-black text-4xl">justpost<span class="text-orange-500">.</span></h1>
 
-        <div>
-            <ul class="flex gap-32 text-2xl font-medium">
+
+        <div class="lg:ml-28">
+            <ul class="flex md:gap-32 gap-16 text-2xl font-medium">
                 <a href="/">
                     <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/home.png" class="w-9" alt=""></li>
                 </a>
                 <a href="/profile">
-                    <li class="hover:bg-zinc-100 px-6  border-zinc-200  border-b-2  py-2 cursor-pointer"><img src="/user-sel.png" class="w-9" alt=""></li>
+                    <li class="hover:bg-zinc-100 px-6 border-zinc-200  border-b-2 py-2 cursor-pointer"><img src="/user-sel.png" class="w-9" alt=""></li>
                 </a>
                 <a href="/logout">
                     <li class="hover:bg-zinc-100 px-6  py-2 cursor-pointer"><img src="/sign-out.png" class="w-9" alt=""></li>
@@ -25,13 +27,14 @@
             </ul>
         </div>
 
-        <div class="flex gap-5 items-center">
+        <div class="gap-5 items-center hidden md:flex">
             <div class="searchbar"><input type="search" class="border-2 border-zinc-300 py-2 px-3 rounded-full outline-none w-64" placeholder="Search posts"></div>
-            
+           
             
         </div>
     </div>
    </Nav>
+<!-- navbar -->
 
    <main class="flex flex-col gap-6 items-center mt-7">
     <% 
@@ -48,10 +51,10 @@
     
     <!-- profile pic box -->
    
-    <div class="copy-notice w-96 h-20 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
-        <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
+    <div class="copy-notice lg:w-96 w-11/12 lg:h-20 h-14 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
+        <h1 class="text-white font-medium lg:text-2xl text-xl">Post link copied to clipboard</h1>
         
-    </div>
+        </div>
     <!-- edit box -->
    
     <!-- edit box -->
@@ -60,13 +63,20 @@
    
     <!-- status box -->
 
-    <div class=" w-2/5 h-48  bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3  items-end justify-center">
-        
-        <h1 class="font-bold text-white text-5xl"><%= user.name %><span class="text-orange-500">.</span></h1>
+   <!-- profile data -->
+   <div class="lg:w-2/5 w-11/12 h-64 drop-shadow-md rounded-xl flex flex-col items-start justify-between relative">
+    <div class="w-full h-40 lg:h-48 bg-zinc-900 drop-shadow-md rounded-xl p-3 flex gap-3 items-end justify-center"></div>
+
+    <div class="transform translate-y-1/2 absolute flex items-center gap-3 pl-3">
+
+        <div class="lg:w-44 lg:h-44 w-36 h-36 bg-black border-4 border-black rounded-full z-10 overflow-hidden   ">
+            <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
+        </div>
+        <h1 class="font-bold text-white  text-3xl lg:text-5xl mb-3 lg:mb-6"><%= user.name %><span class="text-orange-500">.</span></h1>
+       
     </div>
-    <div class="w-44 h-44 bg-black border-4 border-black rounded-full z-10 overflow-hidden absolute left-1/3 top-48">
-        <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
-    </div>
+</div>
+<!-- profile data -->
     
     
     
@@ -75,8 +85,8 @@
        
     </div> -->
 
-    <div class=" w-2/5 h-96 mt-20  flex gap-6 items-center justify-center">
-        <div class="w-2/4 h-full bg-zinc-200 drop-shadow-md p-3 rounded-xl flex flex-col justify-between ">
+    <div class=" lg:w-2/5 w-11/12 h-96 mt-20 lg:mt-20 flex gap-6 items-center flex-col lg:flex-row justify-center">
+        <div class="lg:w-2/4 w-full h-full bg-zinc-200 drop-shadow-md p-3 rounded-xl flex flex-col justify-between  ">
             <h2 class="font-bold text-6xl text-black ">Profile Data<span class="text-orange-500">.</span></h2>
             <div class="text-black">
                 <h2 class="font-medium text-xl">User Data:</h2>
@@ -107,20 +117,20 @@
             
             <button class=" text-white px-3 py-1 text-xl rounded-md font-medium w-32 self-end" disabled></button>
          </div>
-        <div class="w-2/4 h-full bg-blue-400 drop-shadow-md p-3 rounded-xl flex flex-col justify-between">
+        <div class="lg:w-2/4 w-full h-full bg-blue-400 drop-shadow-md p-3 rounded-xl flex flex-col justify-between">
            <h2 class="font-bold text-6xl text-white">Featured Status<span class="text-orange-500">.</span></h2>
-           <p class="text-white -mt-16 text-3xl font-thin"><%= user.status %></p>
+           <p class="text-white lg:-mt-16 my-6 md:my-1 text-3xl font-thin"><%= user.status %></p>
            <button class=" text-white px-3 py-1 text-xl rounded-md font-medium w-28 self-end" disabled></button>
         </div>
     </div>
 
     
         
-    <div class=" w-2/5 mt-3 h-20 bg-zinc-900 rounded-xl p-3 flex   items-center justify-center">
-        <h2 class="font-bold text-white text-3xl"><%= user.name %>'s Posts<span class="text-orange-500 text-4xl">.</span></h2>
+    <div class="lg:w-2/5 w-11/12 lg:mt-3 mt-28 lg:h-20 h-12 bg-zinc-900 rounded-xl p-3 flex items-center justify-center">
+        <h2 class="font-bold text-white lg:text-3xl text-2xl mb-3 md:mb-0"><%= user.name %>'s Posts<span class="text-orange-500 text-4xl">.</span></h2>
     </div>
 
-    <div class="read w-2/5 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
+    <div class="read lg:w-2/5 w-11/12 min-h-60 bg-transparent drop-shadow-md rounded-xl flex gap-5 flex-col items-center">
         
         <% user.posts.reverse().forEach(element => {%>
             

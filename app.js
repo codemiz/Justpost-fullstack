@@ -268,9 +268,9 @@ function isLoggedIn(req,res,next){
   }
   
 }
-
+const ip = '0.0.0.0';
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
+app.listen(PORT, ip, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 

@@ -7,8 +7,8 @@
     <title>JustPost.</title>
 </head>
 <body class="bg-zinc-100">
-    <div class="copy-notice w-96 h-20 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
-        <h1 class="text-white font-medium text-2xl">Post link copied to clipboard</h1>
+    <div class="copy-notice lg:w-96 w-11/12 lg:h-20 h-14 bg-black opacity-80 fixed z-10 bottom-9 left-2/4 transform -translate-x-1/2 flex gap-2 justify-center items-center rounded-xl drop-shadow-lg invisible">
+        <h1 class="text-white font-medium lg:text-2xl text-xl">Post link copied to clipboard</h1>
         
     </div>
 
@@ -55,7 +55,7 @@
         </div>
         
         <form class="w-full h-3/4 flex gap-3 flex-col items-center" action="/user/home/post" method="post">
-            <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, John?"></textarea>
+            <textarea name="content" id="userText" class="border-b-2 w-full h-3/4 p-2 text-xl rounded-xl outline-none" placeholder="What's on your mind, <%= user.name %>?"></textarea>
             <button type="submit" class="bg-blue-400 text-white px-11 rounded-3xl text-2xl font-semibold py-2 self-end">Post</button>
         </form>
         
