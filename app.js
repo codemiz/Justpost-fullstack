@@ -108,7 +108,7 @@ app.post("/user/signup", async (req,res)=>{
   })
   console.log(newUser);
   let token =  jwt.sign({email: email, id:newUser._id},process.env.JWT_SECRET);
-  res.cookie("token",token)
+  res.cookie("token",token,{maxAge:2592000000})
   res.redirect("/")
 })
 app.post("/user/login", async (req,res)=>{
@@ -117,7 +117,7 @@ app.post("/user/login", async (req,res)=>{
   const oldUser =await userModel.findOne({email})
   console.log(oldUser);
   let token =  jwt.sign({email: email, id:oldUser._id},process.env.JWT_SECRET);
-  res.cookie("token",token)
+  res.cookie("token",token,{maxAge:2592000000})
   res.redirect("/")
 })
 
