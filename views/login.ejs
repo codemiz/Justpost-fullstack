@@ -27,10 +27,12 @@
             </div>
             <form action="/user/login" method="post" class="flex flex-col gap-8 lg:m-8 text-xl items-center lg:items-start">
                 
-                <input type="email" name="email" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Email">
+                <input type="email" name="email" required class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none pb-1" placeholder="Email">
 
-                <input type="password" name="password" class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none" placeholder="Password">
-
+                <input type="password" name="password" minlength="6" required class="border-b-2 border-zinc-400 w-4/5 bg-transparent outline-none pb-1" placeholder="Password">
+                <% if (error) { %>
+                    <p class="font-thin !text-red-500"><%= error %></p>
+                    <% } %>
                
                 <input type="submit" value="Login" class="bg-black text-white h-12 w-36 p-1 rounded-3xl text-xl font-bold">
             </form>

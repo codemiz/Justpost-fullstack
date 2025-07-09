@@ -1052,7 +1052,9 @@ video {
 .p-1 {
   padding: 0.25rem;
 }
-
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
 .p-10 {
   padding: 2.5rem;
 }
@@ -1186,6 +1188,11 @@ video {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.\!text-red-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(239 68 68 / var(--tw-text-opacity)) !important;
 }
 
 .text-black {

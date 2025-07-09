@@ -70,7 +70,7 @@
     <div class="transform translate-y-1/2 absolute flex items-center gap-3 pl-3">
 
         <div class="lg:w-44 lg:h-44 w-36 h-36 bg-black border-4 border-black rounded-full z-10 overflow-hidden   ">
-            <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
+            <img src="<%= user.profilePic %>" class="w-full h-full object-cover" alt="">
         </div>
         <h1 class="font-bold text-white  text-3xl lg:text-5xl mb-3 lg:mb-6"><%= user.name %><span class="text-orange-500">.</span></h1>
        
@@ -141,7 +141,7 @@
                     <div class="flex gap-2 items-center">
 
                         <div class="profile-pic">
-                            <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="/uploads/<%= user.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
+                            <div class="w-10 h-10 bg-black rounded-full overflow-hidden"> <img src="<%= user.profilePic %>" class="w-full h-full object-cover"  alt=""></div>
                         </div>
                         <div class="flex flex-col">
                             <h2 class="text-lg font-normal text-blue-600"><%= user.name %></h2>

@@ -10,6 +10,14 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const post = require('./models/post');
+const cloudinary = require("cloudinary")
+
+
+cloudinary.config({
+    cloud_name: 'dxpbvp4bj',
+    api_key : "265667475447262",
+    api_secret: "dG3yL3VgCkbCituaeble1RiXOZI"
+})
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +36,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({ dest: "uploads/" });
 
 //main routes
 app.get('/',isLoggedIn, async (req, res) => {
@@ -41,7 +49,7 @@ app.get('/',isLoggedIn, async (req, res) => {
   
 });
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register' , {error: null});
 });
 app.get('/logout', (req, res) => {
   
@@ -50,7 +58,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login' , {error : null});
 });
 
 
@@ -81,8 +89,13 @@ app.get("/post/:postid",async (req,res)=>{
 //Api routes
 app.post("/upload/profile/pic",isLoggedIn,upload.single('avatar'), async (req,res)=>{
   const user = await userModel.findOne({_id:req.user.id});
-
-  user.profilePic = req.file.filename;
+  if(!user){
+    res.redirect("/profile")
+  }
+  const result = await cloudinary.uploader.upload(req.file.path , { folder : "JustPost"})
+  console.log(result);
+  
+  user.profilePic = result.secure_url;
   await user.save();
   res.redirect("/profile")
 })
@@ -96,11 +109,27 @@ app.post("/upload/status",isLoggedIn, async (req,res)=>{
 app.post("/user/signup", async (req,res)=>{
   const {name,username,email,password,age,gender} = req.body;
   
+  const user = await userModel.findOne({email})
+  if(user){
+    console.log(user);
+    
+    return res.render("register" , {error: "Email already exists. try logging in."})
+  }
+  
+  if(password.length < 6){
+    return res.render("register" , {error: "Password should be minimum of 6 charactars."})
+  }
+  const oldUsername = await userModel.findOne({username: username.toLowerCase()})
+  if(oldUsername){
+    return res.render("register" , {error: "Username already taken."})
+    
+  }
+  const hashedPassword =await bcrypt.hash(password , 10)
   const newUser =await userModel.create({
     name,
-    username,
+    username: username.toLowerCase(),
     email,
-    password,
+    password : hashedPassword,
     profilePic:"profile_default.jpg",
     age,
     gender,
@@ -116,6 +145,13 @@ app.post("/user/login", async (req,res)=>{
   
   const oldUser =await userModel.findOne({email})
   console.log(oldUser);
+  if(!oldUser) {
+    return res.render("login" , {error : "User not found"})
+  } 
+
+  if(password !== oldUser.password){
+    return res.render("login" , {error : 'Wrong password'})
+  } 
   let token =  jwt.sign({email: email, id:oldUser._id},process.env.JWT_SECRET);
   res.cookie("token",token,{maxAge:2592000000})
   res.redirect("/")
@@ -258,7 +294,7 @@ function isLoggedIn(req,res,next){
   
   if((req.cookies.token==="") || (!req.cookies.token)){ 
     console.log(req.cookies)
-    res.render("login")
+    res.render("login" , {error: null})
   }else{
     // console.log(req.cookies);
     let data= jwt.verify(req.cookies.token,process.env.JWT_SECRET);
