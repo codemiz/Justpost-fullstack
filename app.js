@@ -13,6 +13,11 @@ const post = require('./models/post');
 const cloudinary = require("cloudinary")
 
 
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD,
+    api_key : process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
