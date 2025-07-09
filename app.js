@@ -148,8 +148,8 @@ app.post("/user/login", async (req,res)=>{
   if(!oldUser) {
     return res.render("login" , {error : "User not found"})
   } 
-
-  if(password !== oldUser.password){
+  const isMatch = await bcrypt.compare(password , oldUser.password)
+  if(!isMatch){
     return res.render("login" , {error : 'Wrong password'})
   } 
   let token =  jwt.sign({email: email, id:oldUser._id},process.env.JWT_SECRET);
