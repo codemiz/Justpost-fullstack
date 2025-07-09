@@ -42,8 +42,6 @@ const upload = multer({ dest: "uploads/" });
 app.get('/',isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({_id:req.user.id});
   const posts = await postModel.find().populate("userID");
-  // console.log(user);
-  // console.log(posts);
   res.render("home",{user,posts})
   
   
