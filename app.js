@@ -13,11 +13,6 @@ const post = require('./models/post');
 const cloudinary = require("cloudinary")
 
 
-cloudinary.config({
-    cloud_name: 'dxpbvp4bj',
-    api_key : "265667475447262",
-    api_secret: "dG3yL3VgCkbCituaeble1RiXOZI"
-})
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
