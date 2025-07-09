@@ -130,7 +130,7 @@ app.post("/user/signup", async (req,res)=>{
     username: username.toLowerCase(),
     email,
     password : hashedPassword,
-    profilePic:"profile_default.jpg",
+    profilePic:"https://res.cloudinary.com/dxpbvp4bj/image/upload/v1752061974/profile_default_kociqs.jpg",
     age,
     gender,
     status:"This is default status, you can upload your own status updates."
@@ -304,9 +304,9 @@ function isLoggedIn(req,res,next){
   }
   
 }
-const ip = '0.0.0.0';
+
 const PORT = process.env.PORT;
-app.listen(PORT, ip, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
